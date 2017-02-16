@@ -42,7 +42,7 @@ public class BeerListContract {
         public static final String COLUMN_LOCATION_BREWERY = "location";
         public static final String COLUMN_TASTERS = "tasters";
         public static final String COLUMN_TASTING_DATES = "tasting_dates";
-        public static final String COLUMN_LOGO_IMAGE = "logo";
-        public static final String COLUMN_BEER_IMAGE = "beer_image";
+        public static final String COLUMN_LOGO_IMAGE_URL = "logo";
+        public static final String COLUMN_BEER_IMAGE_URL = "beer_image";
     }
 }
