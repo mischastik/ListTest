@@ -12,10 +12,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.balda.listtest.Models.BeerListEntry;
 import com.example.balda.listtest.Models.Brewery;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.auth.api.Auth;
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private String mPhotoUrl;
     private RecyclerView mBreweryRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
+    private ProgressBar mProgressBar;
     private SharedPreferences mSharedPreferences;
     private GoogleApiClient mGoogleApiClient;
 
@@ -65,6 +66,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mUsername = ANONYMOUS;
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API)
+                .build();
 
         // Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -85,6 +91,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 .addApi(Auth.GOOGLE_SIGN_IN_API)
                 .build();
 
+        // Initialize ProgressBar and RecyclerView.
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mBreweryRecyclerView = (RecyclerView) findViewById(R.id.breweryRecyclerView);
         mLinearLayoutManager = new LinearLayoutManager(this);
         mLinearLayoutManager.setStackFromEnd(true);
