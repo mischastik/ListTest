@@ -15,10 +15,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <provider
-            android:name="com.example.balda.listtest.BeerListContentProvider"
-            android:authorities="com.example.android.todolist"
-            android:exported="false"/>
+        <activity android:name=".SignInActivity" />
     </application>
 
 </manifest>
