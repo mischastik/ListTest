@@ -10,6 +10,9 @@ public class Brewery {
     private String location;
     private String logoFileID;
 
+    public Brewery() {
+
+    }
 
     public Brewery(String name, String location) {
         this.name = name;
@@ -26,6 +29,10 @@ public class Brewery {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLogoFileID() {

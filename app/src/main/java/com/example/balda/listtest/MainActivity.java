@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         mUsername = ANONYMOUS;
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .enableAutoManage(this /* FragmentActivity */, 1, this /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API)
                 .build();
 
@@ -115,8 +115,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
             @Override
             protected void populateViewHolder(BreweryViewHolder viewHolder, Brewery brewery, int position) {
-                //mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+                mProgressBar.setVisibility(ProgressBar.INVISIBLE);
                 viewHolder.breweryNameTextView.setText(brewery.getName());
+                viewHolder.breweryLocationTextView.setText(brewery.getLocation());
                 if (brewery.getLogoFileID() == null) {
                     //viewHolder.messengerImageView.setImageDrawable(ContextCompat.getDrawable(MainActivity.this,
                     //        R.drawable.ic_account_circle_black_36dp));

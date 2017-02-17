@@ -20,7 +20,9 @@
         tools:text="Weller"
         tools:layout_editor_absoluteX="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/brewery_location"
@@ -30,10 +32,8 @@
         android:fontFamily="monospace"
         android:textColor="#000"
         tools:text="Salzburg"
-        app:layout_constraintLeft_toRightOf="@+id/brewery_item_name"
-        android:layout_marginStart="24dp"
-        app:layout_constraintTop_toTopOf="@+id/brewery_item_name"
-        app:layout_constraintBottom_toBottomOf="@+id/brewery_item_name" />
+        app:layout_constraintTop_toBottomOf="@+id/brewery_item_name"
+        app:layout_constraintLeft_toLeftOf="@+id/brewery_item_name" />
 
 
     <ImageView
