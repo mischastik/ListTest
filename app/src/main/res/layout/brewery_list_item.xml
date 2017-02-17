@@ -7,14 +7,14 @@
     android:orientation="horizontal"
     android:layout_centerVertical="true"
     android:gravity="center"
-    android:padding="16dp">
+    android:padding="4dp">
 
     <TextView
         android:id="@+id/brewery_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|start"
-        android:fontFamily="monospace"
+        android:fontFamily="sans-serif"
         android:textSize="20sp"
         android:paddingRight="4dp"
         tools:text="Weller"
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|end"
-        android:fontFamily="monospace"
+        android:fontFamily="sans-serif-condensed"
         android:textColor="#000"
         tools:text="Salzburg"
         app:layout_constraintTop_toBottomOf="@+id/brewery_item_name"
@@ -37,13 +37,12 @@
 
 
     <ImageView
-        android:src="@drawable/ic_stiegl_bier_logo"
+        android:src="@mipmap/ic_logo_default"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:id="@+id/imageViewLogo"
         android:layout_weight="1"
         android:scaleType="fitCenter"
-        android:layout_marginEnd="4dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
