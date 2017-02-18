@@ -2,4 +2,9 @@
     <string name="app_name">Beer List</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_out">Sign Out</string>
+    <string name="brewery_name">Brewery\'s name</string>
+    <string name="brewery_name_hint">Name without legal form</string>
+    <string name="brewery_location">Address or coordinates:</string>
+    <string name="brewery_location_hint">Sample Street 5, Beertown 12354</string>
+    <string name="brewery_confirm_add">Add</string>
 </resources>

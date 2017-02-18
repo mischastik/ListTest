@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private String mPhotoUrl;
     private RecyclerView mBreweryRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
+    private FloatingActionButton mAddBreweryButton;
     private ProgressBar mProgressBar;
     private SharedPreferences mSharedPreferences;
     private GoogleApiClient mGoogleApiClient;
@@ -107,6 +109,15 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         mBreweryRecyclerView = (RecyclerView) findViewById(R.id.breweryRecyclerView);
         mLinearLayoutManager = new LinearLayoutManager(this);
         mLinearLayoutManager.setStackFromEnd(true);
+        mAddBreweryButton = (FloatingActionButton)findViewById(R.id.button_add_brewery);
+        mAddBreweryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Click action
+                Intent intent = new Intent(MainActivity.this, AddBreweryActivity.class);
+                startActivity(intent);
+            }
+        });
 
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Brewery, BreweryViewHolder>(

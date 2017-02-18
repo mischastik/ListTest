@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_add_brewery"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.balda.listtest.AddBreweryActivity">
+
+    <TextView
+        android:text="@string/brewery_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/textViewBreweryNameLabel" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextBreweryName"
+        android:inputType="text|textPostalAddress"
+        android:hint="@string/brewery_name_hint"
+        android:maxLines="1"
+        style="@style/Widget.AppCompat.EditText"
+        android:layout_below="@+id/textViewBreweryNameLabel"
+        android:layout_marginTop="19dp"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="@string/brewery_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:id="@+id/textViewBreweryLocationLabel"
+        android:layout_below="@+id/editTextBreweryName"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text|textPostalAddress"
+        android:ems="10"
+        android:maxLines="1"
+        android:layout_below="@+id/textViewBreweryLocationLabel"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="19dp"
+        android:id="@+id/editTextBreweryLocation"
+        android:hint="@string/brewery_location_hint"
+        style="@style/Widget.AppCompat.EditText" />
+
+    <Button
+        android:text="@string/brewery_confirm_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextBreweryLocation"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="17dp"
+        android:onClick="confirmAddBrewery"
+        android:id="@+id/buttonConfirmAddBrewery" />
+</RelativeLayout>
