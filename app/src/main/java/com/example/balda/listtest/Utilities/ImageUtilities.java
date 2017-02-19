@@ -3,7 +3,15 @@ package com.example.balda.listtest.Utilities;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.ImageView;
+
+import com.example.balda.listtest.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -40,6 +48,39 @@ public class ImageUtilities {
         File file = new File(context.getExternalFilesDir(null), filename);
         if (file != null) {
             file.delete();
+        }
+    }
+
+    public static void setLogoImage(final Context context, String logoFileID, final ImageView imageView, StorageReference storageReference) {
+        if (logoFileID == null) {
+            // load default image
+            imageView.setImageResource(R.mipmap.ic_logo_default);
+        } else {
+            // try to load image from store, then Firebase store
+            final String filename = logoFileID;
+            if (ImageUtilities.hasExternalStoragePrivateFile(context, filename)) {
+                // load image from local cache
+                Bitmap logoImage = ImageUtilities.loadImageFromExternalStorage(context, filename);
+                imageView.setImageBitmap(logoImage);
+            }
+            else {
+                // load image from firebase
+                File imageFile = ImageUtilities.createExternalStoragePrivateFile(context, filename);
+                StorageReference imageStorageReference = storageReference.child(filename);
+                imageStorageReference.getFile(imageFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        Bitmap logoImage = ImageUtilities.loadImageFromExternalStorage(context, filename);
+                        imageView.setImageBitmap(logoImage);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // load default image
+                        imageView.setImageResource(R.mipmap.ic_logo_default);
+                    }
+                });
+            }
         }
     }
 }

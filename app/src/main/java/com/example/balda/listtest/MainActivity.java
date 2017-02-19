@@ -37,20 +37,9 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 
-public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class MainActivity extends AppCompatActivity
+        implements GoogleApiClient.OnConnectionFailedListener, BreweryViewHolder.BreweryViewHolderOnClickHandler{
 
-    public static class BreweryViewHolder extends RecyclerView.ViewHolder {
-        public TextView breweryNameTextView;
-        public TextView breweryLocationTextView;
-        public ImageView breweryLogoImageView;
-
-        public BreweryViewHolder(View v) {
-            super(v);
-            breweryNameTextView = (TextView) itemView.findViewById(R.id.brewery_item_name);
-            breweryLocationTextView = (TextView) itemView.findViewById(R.id.brewery_location);
-            breweryLogoImageView = (ImageView) itemView.findViewById(R.id.imageViewLogo);
-        }
-    }
     public static final String ANONYMOUS = "anonymous";
     public static final String BREWERIES_CHILD = "breweries";
     private static final String TAG = "MainActivity";
@@ -76,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        BreweryViewHolder.mClickHandler = this;
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mUsername = ANONYMOUS;
 
@@ -140,41 +130,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 mProgressBar.setVisibility(ProgressBar.INVISIBLE);
                 viewHolder.breweryNameTextView.setText(brewery.getName());
                 viewHolder.breweryLocationTextView.setText(brewery.getLocation());
-
-                if (brewery.getLogoFileID() == null) {
-                    // load default image
-                    viewHolder.breweryLogoImageView.setImageResource(R.mipmap.ic_logo_default);
-
-                } else {
-                    //Glide.with(MainActivity.this)
-                    //        .load(friendlyMessage.getPhotoUrl())
-                    //        .into(viewHolder.messengerImageView);
-                    // try to load image from store, then Firebase store
-                    final String filename = brewery.getLogoFileID();
-                    if (ImageUtilities.hasExternalStoragePrivateFile(getApplicationContext(), filename)) {
-                        // load image from local cache
-                        Bitmap logoImage = ImageUtilities.loadImageFromExternalStorage(getApplicationContext(), filename);
-                        viewHolder.breweryLogoImageView.setImageBitmap(logoImage);
-                    }
-                    else {
-                        // load image from firebase
-                        File imageFile = ImageUtilities.createExternalStoragePrivateFile(getApplicationContext(), filename);
-                        StorageReference imageStorageReference = mStorageRef.child(filename);
-                        imageStorageReference.getFile(imageFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                Bitmap logoImage = ImageUtilities.loadImageFromExternalStorage(getApplicationContext(), filename);
-                                viewHolder.breweryLogoImageView.setImageBitmap(logoImage);
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                // load default image
-                                viewHolder.breweryLogoImageView.setImageResource(R.mipmap.ic_logo_default);
-                            }
-                        });
-                    }
-                }
+                viewHolder.id = brewery.getId();
+                ImageUtilities.setLogoImage(getApplicationContext(), brewery.getLogoFileID(), viewHolder.breweryLogoImageView, mStorageRef);
             }
         };
 
@@ -182,12 +139,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
                 super.onItemRangeInserted(positionStart, itemCount);
-                int friendlyMessageCount = mFirebaseAdapter.getItemCount();
+                int breweryCount = mFirebaseAdapter.getItemCount();
                 int lastVisiblePosition = mLinearLayoutManager.findLastCompletelyVisibleItemPosition();
                 // If the recycler view is initially being loaded or the user is at the bottom of the list, scroll
                 // to the bottom of the list to show the newly added message.
                 if (lastVisiblePosition == -1 ||
-                        (positionStart >= (friendlyMessageCount - 1) && lastVisiblePosition == (positionStart - 1))) {
+                        (positionStart >= (breweryCount - 1) && lastVisiblePosition == (positionStart - 1))) {
                     mBreweryRecyclerView.scrollToPosition(positionStart);
                 }
             }
@@ -216,5 +173,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         // be available.
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
         Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBreweryViewItemClick(String id) {
+        //create brewery detail intent
+        Intent breweryDetailIntent = new Intent(MainActivity.this, BreweryDetailViewActivity.class);
+        breweryDetailIntent.putExtra(BreweryDetailViewActivity.EXTRA_BREWERY_ID, id);
+        startActivity(breweryDetailIntent);
     }
 }

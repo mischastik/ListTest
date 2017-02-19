@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Bierliste</string>
+    <string name="sign_in">Anmelden</string>
+    <string name="sign_out">Abmelden</string>
+    <string name="brewery_name">Name der Brauerei</string>
+    <string name="brewery_name_hint">Name ohne Rechtsform</string>
+    <string name="brewery_location">Adresse oder Koordinaten</string>
+    <string name="brewery_location_hint">Musterstr. 5, 12345 Biersee</string>
+    <string name="brewery_confirm_add">Hinzufügen</string>
+</resources>

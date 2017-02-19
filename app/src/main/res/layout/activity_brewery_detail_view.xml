@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_brewery_detail_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.balda.listtest.BreweryDetailViewActivity">
+
+    <TextView
+        android:layout_height="114dp"
+        tools:layout_editor_absoluteY="0dp"
+        android:id="@+id/textViewBreweryDetailName"
+        tools:text="Kitzmann"
+        android:fontFamily="serif"
+        android:textSize="36sp"
+        android:textStyle="normal|italic"
+        android:maxLines="2"
+        app:layout_constraintLeft_toRightOf="@+id/imageViewBreyeryDetailLogo"
+        android:layout_marginStart="8dp"
+        android:layout_width="0dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageViewBreyeryDetailLogo"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewBreweryDetailLocation"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewBreweryDetailName"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:text="Musterstraße 1, 12345 Biersee" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@mipmap/ic_logo_default"
+        tools:layout_editor_absoluteX="0dp"
+        android:id="@+id/imageViewBreyeryDetailLogo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:scaleType="fitCenter" />
+</android.support.constraint.ConstraintLayout>
