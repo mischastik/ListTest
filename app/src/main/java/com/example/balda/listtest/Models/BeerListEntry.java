@@ -11,7 +11,7 @@ public class BeerListEntry {
     private String id;
     private String name;
     private long type;
-    private String breweryID;
+    private String brewery;
     private String photoFileID;
     private List<String> ratings;
     private List<String> userIDs;
@@ -19,11 +19,11 @@ public class BeerListEntry {
 
     public BeerListEntry() {}
 
-    public BeerListEntry(String name, long type, String breweryID)
+    public BeerListEntry(String name, long type, String brewery)
     {
         this.type = type;
         this.name = name;
-        this.breweryID = breweryID;
+        this.brewery = brewery;
     }
 
     public String getId() {
@@ -36,8 +36,12 @@ public class BeerListEntry {
 
     public long getType() { return type; }
 
-    public String getBreweryID() {
-        return breweryID;
+    public String getBrewery() {
+        return brewery;
+    }
+
+    public void setBrewery(String brewery) {
+        this.brewery = brewery;
     }
 
     public String getPhotoFileID() {
@@ -70,5 +74,13 @@ public class BeerListEntry {
 
     public  List<String> getDates() {
         return dates;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

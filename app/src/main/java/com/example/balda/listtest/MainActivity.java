@@ -13,9 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.balda.listtest.Models.Brewery;
@@ -24,24 +22,18 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-import java.io.File;
 
 public class MainActivity extends AppCompatActivity
         implements GoogleApiClient.OnConnectionFailedListener, BreweryViewHolder.BreweryViewHolderOnClickHandler{
 
     public static final String ANONYMOUS = "anonymous";
-    public static final String BREWERIES_CHILD = "breweries";
     private static final String TAG = "MainActivity";
 
     // Firebase instance variables
@@ -99,22 +91,13 @@ public class MainActivity extends AppCompatActivity
         mBreweryRecyclerView = (RecyclerView) findViewById(R.id.breweryRecyclerView);
         mLinearLayoutManager = new LinearLayoutManager(this);
         mLinearLayoutManager.setStackFromEnd(true);
-        mAddBreweryButton = (FloatingActionButton)findViewById(R.id.button_add_brewery);
-        mAddBreweryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Click action
-                Intent intent = new Intent(MainActivity.this, AddBreweryActivity.class);
-                startActivity(intent);
-            }
-        });
 
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Brewery, BreweryViewHolder>(
                 Brewery.class,
                 R.layout.brewery_list_item,
                 BreweryViewHolder.class,
-                mFirebaseDatabaseReference.child(BREWERIES_CHILD)) {
+                mFirebaseDatabaseReference.child(getString(R.string.breweries_child)).orderByChild("name")) {
 
             @Override
             protected Brewery parseSnapshot(DataSnapshot snapshot) {
@@ -152,6 +135,16 @@ public class MainActivity extends AppCompatActivity
 
         mBreweryRecyclerView.setLayoutManager(mLinearLayoutManager);
         mBreweryRecyclerView.setAdapter(mFirebaseAdapter);
+
+        mAddBreweryButton = (FloatingActionButton)findViewById(R.id.button_add_brewery);
+        mAddBreweryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Click action
+                Intent intent = new Intent(MainActivity.this, AddBreweryActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

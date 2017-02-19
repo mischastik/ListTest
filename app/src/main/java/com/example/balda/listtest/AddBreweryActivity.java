@@ -27,7 +27,7 @@ public class AddBreweryActivity extends AppCompatActivity {
     public void confirmAddBrewery(View view) {
         Brewery brewery = new Brewery(mBreweryName.getText().toString(),
                 mBreweryLocation.getText().toString());
-        mFirebaseDatabaseReference.child(MainActivity.BREWERIES_CHILD)
+        mFirebaseDatabaseReference.child(getString(R.string.breweries_child))
                 .push().setValue(brewery);
         mBreweryName.setText("");
         mBreweryLocation.setText("");
