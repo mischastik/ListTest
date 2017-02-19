@@ -7,4 +7,5 @@
     <string name="brewery_location">Address or coordinates</string>
     <string name="brewery_location_hint">Sample Street 5, Beertown 12354</string>
     <string name="brewery_confirm_add">Add</string>
+    <string name="testers">Testers</string>
 </resources>
