@@ -1,5 +1,6 @@
 package com.example.balda.listtest.Models;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -9,16 +10,20 @@ import java.util.Map;
 public class BeerListEntry {
     private String id;
     private String name;
-    private String type;
-    private Brewery brewery;
+    private long type;
+    private String breweryID;
     private String photoFileID;
-    //private Map<String, String> tests;
+    private List<String> ratings;
+    private List<String> userIDs;
+    private List<String> dates;
 
-    public BeerListEntry(String name, String type, Brewery brewery)
+    public BeerListEntry() {}
+
+    public BeerListEntry(String name, long type, String breweryID)
     {
         this.type = type;
         this.name = name;
-        this.brewery = brewery;
+        this.breweryID = breweryID;
     }
 
     public String getId() {
@@ -29,14 +34,10 @@ public class BeerListEntry {
         this.id = id;
     }
 
-    public String getType() { return type; }
+    public long getType() { return type; }
 
-    //public Map<String, Boolean> getTests() {
-    //    return tests;
-    //}
-
-    public Brewery getBrewery() {
-        return brewery;
+    public String getBreweryID() {
+        return breweryID;
     }
 
     public String getPhotoFileID() {
@@ -45,5 +46,29 @@ public class BeerListEntry {
 
     public void setPhotoFileID(String photoFileID) {
         this.photoFileID = photoFileID;
+    }
+
+    public void setRatings(List<String> ratings) {
+        this.ratings = ratings;
+    }
+
+    public List<String> getRatings() {
+        return ratings;
+    }
+
+    public void setUserIDs(List<String> userIDs) {
+        this.userIDs = userIDs;
+    }
+
+    public List<String> getUserIDs() {
+        return userIDs;
+    }
+
+    public void setDates(List<String> dates) {
+        this.dates = dates;
+    }
+
+    public  List<String> getDates() {
+        return dates;
     }
 }
