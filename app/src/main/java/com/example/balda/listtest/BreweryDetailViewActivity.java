@@ -14,7 +14,6 @@ import com.example.balda.listtest.DataPresentation.BeerListEntryAdapter;
 import com.example.balda.listtest.DataPresentation.BeerListEntryViewHolder;
 import com.example.balda.listtest.Models.BeerListEntry;
 import com.example.balda.listtest.Models.Brewery;
-import com.example.balda.listtest.Utilities.BasicUtilities;
 import com.example.balda.listtest.Utilities.ImageUtilities;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
@@ -25,8 +24,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-import java.util.List;
 
 public class BreweryDetailViewActivity extends AppCompatActivity {
     public static final String EXTRA_BREWERY_ID = "BreweryID";

@@ -1,7 +1,6 @@
 package com.example.balda.listtest.Models;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by balda on 17.02.2017.

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.example.balda.listtest.R;
@@ -14,9 +13,6 @@ import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 
 /**
  * Created by balda on 17.02.2017.
