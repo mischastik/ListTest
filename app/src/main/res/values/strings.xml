@@ -1,4 +1,6 @@
 <resources>
+    <string name="breweries_child" translatable="false">breweries</string>
+    <string name="beer_list_entries_child" translatable="false">beers</string>
     <string name="app_name">Beer List</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_out">Sign Out</string>
@@ -8,6 +10,6 @@
     <string name="brewery_location_hint">Sample Street 5, Beertown 12354</string>
     <string name="brewery_confirm_add">Add</string>
     <string name="testers">Testers</string>
-    <string name="breweries_child" translatable="false">breweries</string>
-    <string name="beer_list_entries_child" translatable="false">beers</string>
+    <string name="breweries">Breweries</string>
+    <string name="beers">Beers</string>
 </resources>

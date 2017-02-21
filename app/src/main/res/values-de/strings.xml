@@ -8,4 +8,6 @@
     <string name="brewery_location_hint">Musterstr. 5, 12345 Biersee</string>
     <string name="brewery_confirm_add">Hinzufügen</string>
     <string name="testers">Wertungen</string>
+    <string name="breweries">Brauereien</string>
+    <string name="beers">Biere</string>
 </resources>

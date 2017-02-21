@@ -99,7 +99,7 @@ public class BreweryDetailViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Click action
-                //Intent intent = new Intent(MainActivity.this, ACTIVITY GOES HERE);
+                //Intent intent = new Intent(BreweryListActivity.this, ACTIVITY GOES HERE);
                 //startActivity(intent);
             }
         });
