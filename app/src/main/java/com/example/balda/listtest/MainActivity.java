@@ -2,7 +2,6 @@ package com.example.balda.listtest;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -16,15 +15,15 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.balda.listtest.DataPresentation.BreweryAdapter;
+import com.example.balda.listtest.DataPresentation.BreweryViewHolder;
 import com.example.balda.listtest.Models.Brewery;
-import com.example.balda.listtest.Utilities.ImageUtilities;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -93,45 +92,22 @@ public class MainActivity extends AppCompatActivity
         mLinearLayoutManager.setStackFromEnd(true);
 
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<Brewery, BreweryViewHolder>(
-                Brewery.class,
-                R.layout.brewery_list_item,
-                BreweryViewHolder.class,
-                mFirebaseDatabaseReference.child(getString(R.string.breweries_child)).orderByChild("name")) {
-
-            @Override
-            protected Brewery parseSnapshot(DataSnapshot snapshot) {
-                Brewery brewery = super.parseSnapshot(snapshot);
-                if (brewery != null) {
-                    brewery.setId(snapshot.getKey());
-                }
-                return brewery;
-            }
-
-            @Override
-            protected void populateViewHolder(final BreweryViewHolder viewHolder, Brewery brewery, int position) {
-                mProgressBar.setVisibility(ProgressBar.INVISIBLE);
-                viewHolder.breweryNameTextView.setText(brewery.getName());
-                viewHolder.breweryLocationTextView.setText(brewery.getLocation());
-                viewHolder.id = brewery.getId();
-                ImageUtilities.setLogoImage(getApplicationContext(), brewery.getLogoFileID(), viewHolder.breweryLogoImageView, mStorageRef);
-            }
-        };
-
+        mFirebaseAdapter = new BreweryAdapter(mFirebaseDatabaseReference.child(getString(R.string.breweries_child)).orderByChild("name"),
+                mProgressBar, this, mStorageRef);
         mFirebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-            @Override
-            public void onItemRangeInserted(int positionStart, int itemCount) {
-                super.onItemRangeInserted(positionStart, itemCount);
-                int breweryCount = mFirebaseAdapter.getItemCount();
-                int lastVisiblePosition = mLinearLayoutManager.findLastCompletelyVisibleItemPosition();
-                // If the recycler view is initially being loaded or the user is at the bottom of the list, scroll
-                // to the bottom of the list to show the newly added message.
-                if (lastVisiblePosition == -1 ||
-                        (positionStart >= (breweryCount - 1) && lastVisiblePosition == (positionStart - 1))) {
-                    mBreweryRecyclerView.scrollToPosition(positionStart);
-                }
-            }
-        });
+             @Override
+             public void onItemRangeInserted(int positionStart, int itemCount) {
+                 super.onItemRangeInserted(positionStart, itemCount);
+                 int breweryCount = mFirebaseAdapter.getItemCount();
+                 int lastVisiblePosition = mLinearLayoutManager.findLastCompletelyVisibleItemPosition();
+                 // If the recycler view is initially being loaded or the user is at the bottom of the list, scroll
+                 // to the bottom of the list to show the newly added message.
+                 if (lastVisiblePosition == -1 ||
+                         (positionStart >= (breweryCount - 1) && lastVisiblePosition == (positionStart - 1))){
+                     mBreweryRecyclerView.scrollToPosition(positionStart);
+                 }
+             }
+         });
 
         mBreweryRecyclerView.setLayoutManager(mLinearLayoutManager);
         mBreweryRecyclerView.setAdapter(mFirebaseAdapter);

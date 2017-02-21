@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.balda.listtest.DataPresentation.BeerListEntryAdapter;
+import com.example.balda.listtest.DataPresentation.BeerListEntryViewHolder;
 import com.example.balda.listtest.Models.BeerListEntry;
 import com.example.balda.listtest.Models.Brewery;
 import com.example.balda.listtest.Utilities.BasicUtilities;
@@ -75,49 +77,7 @@ public class BreweryDetailViewActivity extends AppCompatActivity {
         mLinearLayoutManager.setStackFromEnd(true);
 
         Query subDB = mFirebaseDatabaseReference.child(getString(R.string.beer_list_entries_child));//.equalTo(breweryID);
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<BeerListEntry, BeerListEntryViewHolder>(
-                BeerListEntry.class,
-                R.layout.beer_list_entry_item,
-                BeerListEntryViewHolder.class,
-                subDB) {
-
-            @Override
-            protected BeerListEntry parseSnapshot(DataSnapshot snapshot) {
-                BeerListEntry beerListEntry = super.parseSnapshot(snapshot);
-                if (beerListEntry != null) {
-                    beerListEntry.setId(snapshot.getKey());
-                }
-                return beerListEntry;
-            }
-
-            @Override
-            protected void populateViewHolder(final BeerListEntryViewHolder viewHolder, BeerListEntry beerListEntry, int position) {
-
-                //mProgressBar.setVisibility(ProgressBar.INVISIBLE);
-                viewHolder.beerName.setText(beerListEntry.getName());
-                //List<String> testers = beerListEntry.getUserIDs();
-                List<String> ratings = beerListEntry.getRatings();
-                float avgRating = 0.0f;
-                int nRatings = 0;
-                if (ratings != null) {
-                    for (String ratingStr : ratings) {
-                        float rating = (float)Integer.parseInt(ratingStr);
-                        if (rating == 0.0f) {
-                            continue;
-                        }
-                        nRatings++;
-                        avgRating += rating;
-                    }
-                    if (nRatings > 0)
-                        avgRating /= nRatings;
-                    else
-                        avgRating = 0.0f;
-                }
-                viewHolder.ratingBar.setRating(avgRating);
-                viewHolder.testersNumber.setText(String.valueOf(nRatings));
-                viewHolder.beerType.setText(BasicUtilities.getNameForBeerTypeID(beerListEntry.getType()));
-            }
-        };
+        mFirebaseAdapter = new BeerListEntryAdapter(subDB);
 
         mFirebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override

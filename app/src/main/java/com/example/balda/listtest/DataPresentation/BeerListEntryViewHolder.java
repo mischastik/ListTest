@@ -1,9 +1,11 @@
-package com.example.balda.listtest;
+package com.example.balda.listtest.DataPresentation;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.example.balda.listtest.R;
 
 /**
  * Created by balda on 19.02.2017.
