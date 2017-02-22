@@ -1,13 +1,20 @@
 package com.example.balda.listtest.DataPresentation;
 
+import android.content.Context;
+import android.provider.ContactsContract;
 import android.widget.ProgressBar;
 
 import com.example.balda.listtest.Models.BeerListEntry;
+import com.example.balda.listtest.Models.Brewery;
 import com.example.balda.listtest.R;
 import com.example.balda.listtest.Utilities.BasicUtilities;
+import com.example.balda.listtest.Utilities.ImageUtilities;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -17,12 +24,16 @@ import java.util.List;
 
 public class BeerListEntryAdapter extends FirebaseRecyclerAdapter<BeerListEntry, BeerListEntryViewHolder> {
     private ProgressBar mProgressBar;
+    private DatabaseReference mDatabaseReference;
+    private Context mContext;
 
-    public BeerListEntryAdapter(Query dbRef) {
-        super(BeerListEntry.class, R.layout.beer_list_entry_item, BeerListEntryViewHolder.class, dbRef);
+    public BeerListEntryAdapter(DatabaseReference dbRef, Context context) {
+        super(BeerListEntry.class, R.layout.beer_list_entry_item, BeerListEntryViewHolder.class, dbRef.child(context.getString(R.string.beer_list_entries_child)));
+        mDatabaseReference = dbRef;
+        mContext = context;
     }
-    public BeerListEntryAdapter(Query dbRef, ProgressBar progressBar) {
-        this(dbRef);
+    public BeerListEntryAdapter(DatabaseReference dbRef, Context context, ProgressBar progressBar) {
+        this(dbRef, context);
         mProgressBar = progressBar;
     }
     @Override
@@ -61,5 +72,18 @@ public class BeerListEntryAdapter extends FirebaseRecyclerAdapter<BeerListEntry,
         viewHolder.ratingBar.setRating(avgRating);
         viewHolder.testersNumber.setText(String.valueOf(nRatings));
         viewHolder.beerType.setText(BasicUtilities.getNameForBeerTypeID(beerListEntry.getType()));
+        Query query = mDatabaseReference.child(mContext.getString(R.string.breweries_child)).child(beerListEntry.getBrewery());
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Brewery brewery = dataSnapshot.getValue(Brewery.class);
+                viewHolder.breweryName.setText(brewery.getName());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

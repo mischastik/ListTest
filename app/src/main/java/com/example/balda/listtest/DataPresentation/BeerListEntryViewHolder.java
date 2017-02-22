@@ -20,6 +20,7 @@ public class BeerListEntryViewHolder extends RecyclerView.ViewHolder implements 
     public TextView beerName;
     public TextView testersNumber;
     public TextView beerType;
+    public TextView breweryName;
     public RatingBar ratingBar;
     public String id;
     public static BeerListEntryViewHolder.BeerListItemViewHolderOnClickHandler mClickHandler = null;
@@ -29,6 +30,7 @@ public class BeerListEntryViewHolder extends RecyclerView.ViewHolder implements 
         beerName = (TextView) itemView.findViewById(R.id.textViewBeerListEntyName);
         testersNumber = (TextView) itemView.findViewById(R.id.textViewTestersNumber);
         beerType = (TextView)itemView.findViewById(R.id.textViewBeerListEntryItemType);
+        breweryName = (TextView)itemView.findViewById(R.id.textViewBeerListEntryBreweryName);
         ratingBar = (RatingBar) itemView.findViewById(R.id.ratingBarBeerListEntry);
         v.setOnClickListener(this);
     }

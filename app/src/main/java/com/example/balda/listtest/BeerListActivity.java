@@ -32,8 +32,7 @@ public class BeerListActivity extends AppCompatActivity {
         mLinearLayoutManager = new LinearLayoutManager(this);
         mLinearLayoutManager.setStackFromEnd(true);
 
-        Query subDB = mFirebaseDatabaseReference.child(getString(R.string.beer_list_entries_child));
-        mFirebaseAdapter = new BeerListEntryAdapter(subDB, (ProgressBar)findViewById(R.id.progressBarBeerList));
+        mFirebaseAdapter = new BeerListEntryAdapter(mFirebaseDatabaseReference, this, (ProgressBar)findViewById(R.id.progressBarBeerList));
 
         mFirebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override

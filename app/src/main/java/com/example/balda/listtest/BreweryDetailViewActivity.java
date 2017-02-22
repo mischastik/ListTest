@@ -73,8 +73,7 @@ public class BreweryDetailViewActivity extends AppCompatActivity {
         mLinearLayoutManager = new LinearLayoutManager(this);
         mLinearLayoutManager.setStackFromEnd(true);
 
-        Query subDB = mFirebaseDatabaseReference.child(getString(R.string.beer_list_entries_child));//.equalTo(breweryID);
-        mFirebaseAdapter = new BeerListEntryAdapter(subDB);
+        mFirebaseAdapter = new BeerListEntryAdapter(mFirebaseDatabaseReference, this);
 
         mFirebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
