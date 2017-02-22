@@ -1,5 +1,6 @@
 package com.example.balda.listtest;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,13 +11,15 @@ import android.widget.ProgressBar;
 
 import com.example.balda.listtest.DataPresentation.BeerListEntryAdapter;
 import com.example.balda.listtest.DataPresentation.BeerListEntryViewHolder;
+import com.example.balda.listtest.DataPresentation.BreweryViewHolder;
 import com.example.balda.listtest.Models.BeerListEntry;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
-public class BeerListActivity extends AppCompatActivity {
+public class BeerListActivity extends AppCompatActivity
+        implements BeerListEntryViewHolder.BeerListItemViewHolderOnClickHandler {
     private RecyclerView mBeerListEntryRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private FirebaseRecyclerAdapter<BeerListEntry, BeerListEntryViewHolder> mFirebaseAdapter;
@@ -27,6 +30,7 @@ public class BeerListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beer_list);
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        BeerListEntryViewHolder.mClickHandler = this;
 
         mBeerListEntryRecyclerView = (RecyclerView) findViewById(R.id.beerListActivityRecyclerView);
         mLinearLayoutManager = new LinearLayoutManager(this);
@@ -51,5 +55,13 @@ public class BeerListActivity extends AppCompatActivity {
 
         mBeerListEntryRecyclerView.setLayoutManager(mLinearLayoutManager);
         mBeerListEntryRecyclerView.setAdapter(mFirebaseAdapter);
+    }
+
+    @Override
+    public void onBeerListItemViewItemClick(String id) {
+        //create brewery detail intent
+        Intent beerListEntryDetailIntent = new Intent(BeerListActivity.this, BeerDetailViewActivity.class);
+        beerListEntryDetailIntent.putExtra(BeerDetailViewActivity.EXTRA_BEER_ID, id);
+        startActivity(beerListEntryDetailIntent);
     }
 }

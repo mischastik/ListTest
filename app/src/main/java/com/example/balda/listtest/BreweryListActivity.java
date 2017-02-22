@@ -30,7 +30,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 public class BreweryListActivity extends AppCompatActivity
-        implements BreweryViewHolder.BreweryViewHolderOnClickHandler{
+        implements BreweryViewHolder.BreweryViewHolderOnClickHandler {
 
     private static final String TAG = "BreweryListActivity";
 
