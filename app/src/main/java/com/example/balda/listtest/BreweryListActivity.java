@@ -30,26 +30,20 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 public class BreweryListActivity extends AppCompatActivity
-        implements GoogleApiClient.OnConnectionFailedListener, BreweryViewHolder.BreweryViewHolderOnClickHandler{
+        implements BreweryViewHolder.BreweryViewHolderOnClickHandler{
 
-    public static final String ANONYMOUS = "anonymous";
     private static final String TAG = "BreweryListActivity";
 
     // Firebase instance variables
-    private FirebaseAuth mFirebaseAuth;
-    private FirebaseUser mFirebaseUser;
     private DatabaseReference mFirebaseDatabaseReference;
     private FirebaseRecyclerAdapter<Brewery, BreweryViewHolder> mFirebaseAdapter;
     private StorageReference mStorageRef;
 
-    private String mUsername;
-    private String mPhotoUrl;
     private RecyclerView mBreweryRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private FloatingActionButton mAddBreweryButton;
     private ProgressBar mProgressBar;
     private SharedPreferences mSharedPreferences;
-    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,32 +52,6 @@ public class BreweryListActivity extends AppCompatActivity
 
         BreweryViewHolder.mClickHandler = this;
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mUsername = ANONYMOUS;
-
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, 1, this /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API)
-                .build();
-
-        // Initialize Firebase Auth
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        mFirebaseUser = mFirebaseAuth.getCurrentUser();
-
-        if (mFirebaseUser == null) {
-            // Not signed in, launch the Sign In activity
-            startActivity(new Intent(this, SignInActivity.class));
-            finish();
-            return;
-        } else {
-            mUsername = mFirebaseUser.getDisplayName();
-            mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
-        }
-
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API)
-                .build();
-
         mStorageRef = FirebaseStorage.getInstance().getReference();
         // Initialize ProgressBar and RecyclerView.
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -121,27 +89,6 @@ public class BreweryListActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.sign_out_menu:
-                mFirebaseAuth.signOut();
-                Auth.GoogleSignInApi.signOut(mGoogleApiClient);
-                mUsername = ANONYMOUS;
-                startActivity(new Intent(this, SignInActivity.class));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        // An unresolvable error has occurred and Google APIs (including Sign-In) will not
-        // be available.
-        Log.d(TAG, "onConnectionFailed:" + connectionResult);
-        Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
