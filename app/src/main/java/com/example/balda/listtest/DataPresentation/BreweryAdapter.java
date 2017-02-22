@@ -29,19 +29,21 @@ public class BreweryAdapter extends FirebaseRecyclerAdapter<Brewery, BreweryView
 
     @Override
     protected Brewery parseSnapshot(DataSnapshot snapshot) {
-            Brewery brewery = super.parseSnapshot(snapshot);
-            if (brewery != null) {
+        Brewery brewery = super.parseSnapshot(snapshot);
+        if (brewery != null) {
             brewery.setId(snapshot.getKey());
-            }
-            return brewery;
-            }
+        }
+        return brewery;
+    }
 
     @Override
     protected void populateViewHolder(final BreweryViewHolder viewHolder, Brewery brewery, int position) {
+        if (mProgressBar != null) {
             mProgressBar.setVisibility(ProgressBar.INVISIBLE);
-            viewHolder.breweryNameTextView.setText(brewery.getName());
-            viewHolder.breweryLocationTextView.setText(brewery.getLocation());
-            viewHolder.id = brewery.getId();
-            ImageUtilities.setLogoImage(mContext, brewery.getLogoFileID(), viewHolder.breweryLogoImageView, mStorageRef);
+        }
+        viewHolder.breweryNameTextView.setText(brewery.getName());
+        viewHolder.breweryLocationTextView.setText(brewery.getLocation());
+        viewHolder.id = brewery.getId();
+        ImageUtilities.setLogoImage(mContext, brewery.getLogoFileID(), viewHolder.breweryLogoImageView, mStorageRef);
     }
 }

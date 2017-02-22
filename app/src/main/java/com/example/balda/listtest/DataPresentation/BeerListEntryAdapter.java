@@ -1,5 +1,7 @@
 package com.example.balda.listtest.DataPresentation;
 
+import android.widget.ProgressBar;
+
 import com.example.balda.listtest.Models.BeerListEntry;
 import com.example.balda.listtest.R;
 import com.example.balda.listtest.Utilities.BasicUtilities;
@@ -14,11 +16,15 @@ import java.util.List;
  */
 
 public class BeerListEntryAdapter extends FirebaseRecyclerAdapter<BeerListEntry, BeerListEntryViewHolder> {
+    private ProgressBar mProgressBar;
 
     public BeerListEntryAdapter(Query dbRef) {
         super(BeerListEntry.class, R.layout.beer_list_entry_item, BeerListEntryViewHolder.class, dbRef);
     }
-
+    public BeerListEntryAdapter(Query dbRef, ProgressBar progressBar) {
+        this(dbRef);
+        mProgressBar = progressBar;
+    }
     @Override
     protected BeerListEntry parseSnapshot(DataSnapshot snapshot) {
         BeerListEntry beerListEntry = super.parseSnapshot(snapshot);
@@ -30,7 +36,9 @@ public class BeerListEntryAdapter extends FirebaseRecyclerAdapter<BeerListEntry,
 
     @Override
     protected void populateViewHolder(final BeerListEntryViewHolder viewHolder, BeerListEntry beerListEntry, int position) {
-        //mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+        if (mProgressBar != null) {
+            mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+        }
         viewHolder.beerName.setText(beerListEntry.getName());
         //List<String> testers = beerListEntry.getUserIDs();
         List<String> ratings = beerListEntry.getRatings();
