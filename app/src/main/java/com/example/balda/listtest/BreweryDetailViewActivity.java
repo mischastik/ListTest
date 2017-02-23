@@ -50,8 +50,7 @@ public class BreweryDetailViewActivity extends AppCompatActivity {
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
         // get id, load from DB and populate views
-        Intent myIntent = getIntent();
-        String breweryID = myIntent.getStringExtra(EXTRA_BREWERY_ID);
+        String breweryID = getIntent().getStringExtra(EXTRA_BREWERY_ID);
 
         Query query = mFirebaseDatabaseReference.child(getString(R.string.breweries_child)).child(breweryID);
         query.addValueEventListener(new ValueEventListener() {

@@ -43,7 +43,6 @@ public class BreweryListActivity extends AppCompatActivity
     private LinearLayoutManager mLinearLayoutManager;
     private FloatingActionButton mAddBreweryButton;
     private ProgressBar mProgressBar;
-    private SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +50,6 @@ public class BreweryListActivity extends AppCompatActivity
         setContentView(R.layout.activity_brewery_list);
 
         BreweryViewHolder.mClickHandler = this;
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mStorageRef = FirebaseStorage.getInstance().getReference();
         // Initialize ProgressBar and RecyclerView.
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);

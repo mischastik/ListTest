@@ -14,7 +14,7 @@
     <ImageView
         android:layout_width="100dp"
         app:srcCompat="@mipmap/ic_logo_default"
-        android:id="@+id/imageViewBeerDetailLogo"
+        android:id="@+id/imageViewBeerDetailBreweryLogo"
         android:layout_height="100dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
@@ -24,8 +24,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/textViewBeerDetailBreweryName"
         tools:text="Neder"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="108dp" />
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/imageViewBeerDetailBreweryLogo"
+        app:layout_constraintTop_toTopOf="@+id/imageViewBeerDetailBreweryLogo"
+        android:layout_marginTop="8dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -36,15 +38,16 @@
         android:typeface="serif"
         android:textSize="24sp"
         android:textColor="@color/colorAccent"
-        tools:layout_editor_absoluteY="33dp"
-        tools:layout_editor_absoluteX="108dp" />
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/imageViewBeerDetailBreweryLogo"
+        app:layout_constraintTop_toBottomOf="@+id/textViewBeerDetailBreweryName" />
 
     <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ratingBarBeerDetailAverageRating"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewBeerDetailLogo"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewBeerDetailBreweryLogo"
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginEnd="16dp"

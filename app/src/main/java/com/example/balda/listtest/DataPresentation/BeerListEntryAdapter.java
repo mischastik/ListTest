@@ -50,27 +50,17 @@ public class BeerListEntryAdapter extends FirebaseRecyclerAdapter<BeerListEntry,
         if (mProgressBar != null) {
             mProgressBar.setVisibility(ProgressBar.INVISIBLE);
         }
+        viewHolder.id = beerListEntry.getId();
         viewHolder.beerName.setText(beerListEntry.getName());
         //List<String> testers = beerListEntry.getUserIDs();
         List<String> ratings = beerListEntry.getRatings();
-        float avgRating = 0.0f;
-        int nRatings = 0;
-        if (ratings != null) {
-            for (String ratingStr : ratings) {
-                float rating = (float)Integer.parseInt(ratingStr);
-                if (rating == 0.0f) {
-                    continue;
-                }
-                nRatings++;
-                avgRating += rating;
-            }
-            if (nRatings > 0)
-                avgRating /= nRatings;
-            else
-                avgRating = 0.0f;
+        viewHolder.ratingBar.setRating(BasicUtilities.calculateAvgRating(ratings));
+        if (ratings == null) {
+            viewHolder.testersNumber.setText("0");
+        } else {
+            viewHolder.testersNumber.setText(String.valueOf(ratings.size()));
         }
-        viewHolder.ratingBar.setRating(avgRating);
-        viewHolder.testersNumber.setText(String.valueOf(nRatings));
+
         viewHolder.beerType.setText(BasicUtilities.getNameForBeerTypeID(beerListEntry.getType()));
         Query query = mDatabaseReference.child(mContext.getString(R.string.breweries_child)).child(beerListEntry.getBrewery());
         query.addValueEventListener(new ValueEventListener() {
