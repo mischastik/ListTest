@@ -1,4 +1,4 @@
-package com.example.balda.listtest;
+package com.example.balda.listtest.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.example.balda.listtest.Models.BeerListEntry;
 import com.example.balda.listtest.Models.Brewery;
+import com.example.balda.listtest.R;
 import com.example.balda.listtest.Utilities.BasicUtilities;
 import com.example.balda.listtest.Utilities.ImageUtilities;
 import com.google.firebase.database.DataSnapshot;

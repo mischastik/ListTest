@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.balda.listtest.BreweryDetailViewActivity">
+    tools:context="com.example.balda.listtest.Activities.BreweryDetailViewActivity">
 
     <TextView
         android:layout_height="114dp"

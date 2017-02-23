@@ -1,4 +1,4 @@
-package com.example.balda.listtest;
+package com.example.balda.listtest.Activities;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +14,7 @@ import com.example.balda.listtest.DataPresentation.BeerListEntryAdapter;
 import com.example.balda.listtest.DataPresentation.BeerListEntryViewHolder;
 import com.example.balda.listtest.Models.BeerListEntry;
 import com.example.balda.listtest.Models.Brewery;
+import com.example.balda.listtest.R;
 import com.example.balda.listtest.Utilities.ImageUtilities;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;

@@ -1,22 +1,19 @@
-package com.example.balda.listtest;
+package com.example.balda.listtest.Activities;
 
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.ProgressBar;
 
 import com.example.balda.listtest.DataPresentation.BeerListEntryAdapter;
 import com.example.balda.listtest.DataPresentation.BeerListEntryViewHolder;
-import com.example.balda.listtest.DataPresentation.BreweryViewHolder;
 import com.example.balda.listtest.Models.BeerListEntry;
+import com.example.balda.listtest.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 
 public class BeerListActivity extends AppCompatActivity
         implements BeerListEntryViewHolder.BeerListItemViewHolderOnClickHandler {
