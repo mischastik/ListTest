@@ -56,8 +56,12 @@ public class BeerDetailViewActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Brewery brewery = dataSnapshot.getValue(Brewery.class);
-                        mBreweryName.setText(brewery.getName());
-                        mBreweryLogo.setImageBitmap(ImageUtilities.loadImageFromExternalStorage(getBaseContext(), brewery.getLogoFileID()));
+                        if (brewery == null) {
+                            mBreweryName.setText("Database error");
+                        } else {
+                            mBreweryName.setText(brewery.getName());
+                            mBreweryLogo.setImageBitmap(ImageUtilities.loadImageFromExternalStorage(getBaseContext(), brewery.getLogoFileID()));
+                        }
                     }
 
                     @Override

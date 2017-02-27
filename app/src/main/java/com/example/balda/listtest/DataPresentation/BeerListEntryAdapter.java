@@ -67,7 +67,11 @@ public class BeerListEntryAdapter extends FirebaseRecyclerAdapter<BeerListEntry,
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Brewery brewery = dataSnapshot.getValue(Brewery.class);
-                viewHolder.breweryName.setText(brewery.getName());
+                if (brewery == null) {
+                    viewHolder.breweryName.setText("Database error");
+                } else {
+                    viewHolder.breweryName.setText(brewery.getName());
+                }
             }
 
             @Override

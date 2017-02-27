@@ -26,7 +26,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-public class BreweryDetailViewActivity extends AppCompatActivity {
+public class BreweryDetailViewActivity extends AppCompatActivity
+        implements BeerListEntryViewHolder.BeerListItemViewHolderOnClickHandler {
     public static final String EXTRA_BREWERY_ID = "BreweryID";
 
     private DatabaseReference mFirebaseDatabaseReference;
@@ -49,6 +50,7 @@ public class BreweryDetailViewActivity extends AppCompatActivity {
         mBreweryDetailLocation = (TextView)findViewById(R.id.textViewBreweryDetailLocation);
         mBreweryDetailLogo = (ImageView)findViewById(R.id.imageViewBreyeryDetailLogo);
         mStorageRef = FirebaseStorage.getInstance().getReference();
+        BeerListEntryViewHolder.mClickHandler = this;
 
         // get id, load from DB and populate views
         String breweryID = getIntent().getStringExtra(EXTRA_BREWERY_ID);
@@ -102,5 +104,13 @@ public class BreweryDetailViewActivity extends AppCompatActivity {
                 //startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onBeerListItemViewItemClick(String id) {
+        //create brewery detail intent
+        Intent beerListEntryDetailIntent = new Intent(BreweryDetailViewActivity.this, BeerDetailViewActivity.class);
+        beerListEntryDetailIntent.putExtra(BeerDetailViewActivity.EXTRA_BEER_ID, id);
+        startActivity(beerListEntryDetailIntent);
     }
 }
