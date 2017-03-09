@@ -13,4 +13,5 @@
     <string name="add_beer">Prost!</string>
     <string name="beer_type">Sorte</string>
     <string name="beer_name">Bezeichnung</string>
+    <string name="name_without_brewery">Name ohne Brauerei</string>
 </resources>

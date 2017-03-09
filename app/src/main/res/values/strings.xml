@@ -15,6 +15,7 @@
     <string name="add_beer">Add a new beer</string>
     <string name="beer_name">Name</string>
     <string name="beer_type">Type</string>
+    <string name="name_without_brewery">Name without brewery</string>
     <string-array name="beer_types">
         <item>n/a</item>
         <item>Helles</item>

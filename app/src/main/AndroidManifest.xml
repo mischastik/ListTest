@@ -23,7 +23,7 @@
         <activity android:name=".Activities.BreweryDetailViewActivity" />
         <activity android:name=".Activities.BeerListActivity" />
         <activity android:name=".Activities.BeerDetailViewActivity" />
-        <activity android:name=".Activities.AddBeerActivity"></activity>
+        <activity android:name=".Activities.AddBeerActivity"/>
     </application>
 
 </manifest>
