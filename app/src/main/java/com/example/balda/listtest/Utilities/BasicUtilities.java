@@ -7,20 +7,15 @@ import java.util.List;
  */
 
 public class BasicUtilities {
+    public static final String[] BEER_TYPES = new String[] { "n/a", "Helles", "Dunkles", "Pils", "Weizen"};
+
     public static String getNameForBeerTypeID(long id) {
-        switch ((int)id) {
-            case 1:
-                return "Helles";
-            case 2:
-                return "Dunkles";
-            case 3:
-                return "Pils";
-            case 4:
-                return "Weizen";
-            default:
-                return "n/a";
-        }
+        if (id >= BEER_TYPES.length || id < 0)
+            return "n/a";
+
+        return BEER_TYPES[(int)id];
     }
+
     public static float calculateAvgRating(List<String> ratings) {
         float avgRating = 0.0f;
         int nRatings = 0;

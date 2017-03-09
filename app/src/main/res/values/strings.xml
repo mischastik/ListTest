@@ -12,4 +12,14 @@
     <string name="testers">Testers</string>
     <string name="breweries">Breweries</string>
     <string name="beers">Beers</string>
+    <string name="add_beer">Add a new beer</string>
+    <string name="beer_name">Name</string>
+    <string name="beer_type">Type</string>
+    <string-array name="beer_types">
+        <item>n/a</item>
+        <item>Helles</item>
+        <item>Dunkles</item>
+        <item>Pils</item>
+        <item>Weizen</item>
+    </string-array>
 </resources>

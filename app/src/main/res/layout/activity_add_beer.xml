@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.balda.listtest.Activities.AddBeerActivity">
+
+    <TextView
+        android:id="@+id/textViewAddBeerHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/add_beer"
+        android:layout_marginStart="8dp" />
+
+    <TextView
+        android:id="@+id/textViewAddBeerBreweryNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/brewery_name"
+        app:layout_constraintLeft_toLeftOf="@+id/textViewAddBeerNameLabel"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAddBeerNameLabel"
+        android:layout_marginStart="8dp" />
+
+    <TextView
+        android:id="@+id/textViewAddBeerBrewery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="32dp"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAddBeerBreweryNameLabel"
+        app:layout_constraintLeft_toRightOf="@+id/textViewAddBeerBreweryNameLabel"
+        app:layout_constraintTop_toTopOf="@+id/textViewAddBeerBreweryNameLabel"
+        tools:text="Rittmayer"
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginStart="32dp" />
+
+    <TextView
+        android:id="@+id/textViewAddBeerTypeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/beer_type"
+        app:layout_constraintLeft_toLeftOf="@+id/textViewAddBeerBreweryNameLabel"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAddBeerBreweryNameLabel"
+        android:layout_marginLeft="0dp" />
+
+    <Spinner
+        android:id="@+id/spinnerAddBeerType"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        android:entries="@array/beer_types"
+        android:spinnerMode="dialog"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAddBeerTypeLabel"
+        app:layout_constraintLeft_toLeftOf="@+id/textViewAddBeerBrewery"
+        app:layout_constraintTop_toTopOf="@+id/textViewAddBeerTypeLabel"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textViewAddBeerNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/beer_name"
+        app:layout_constraintLeft_toLeftOf="@+id/textViewAddBeerHeading"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAddBeerHeading" />
+
+    <EditText
+        android:id="@+id/editTextAddBeerName"
+        android:layout_width="257dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAddBeerNameLabel"
+        app:layout_constraintLeft_toRightOf="@+id/textViewAddBeerNameLabel"
+        app:layout_constraintTop_toTopOf="@+id/textViewAddBeerNameLabel"
+        tools:text="Helles" />
+
+    <RatingBar
+        android:id="@+id/ratingBarAddBeerRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="16dp"
+        android:numStars="5"
+        android:stepSize="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAddBeerTypeLabel" />
+
+    <Button
+        android:id="@+id/buttonAddBeer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/brewery_confirm_add"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBarAddBeerRatingBar" />
+</android.support.constraint.ConstraintLayout>

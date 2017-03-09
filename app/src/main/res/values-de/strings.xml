@@ -10,4 +10,7 @@
     <string name="testers">Wertungen</string>
     <string name="breweries">Brauereien</string>
     <string name="beers">Biere</string>
+    <string name="add_beer">Prost!</string>
+    <string name="beer_type">Sorte</string>
+    <string name="beer_name">Bezeichnung</string>
 </resources>
