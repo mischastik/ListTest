@@ -39,6 +39,8 @@ public class BreweryDetailViewActivity extends AppCompatActivity
     private TextView mBreweryDetailLocation;
     private ImageView mBreweryDetailLogo;
     private FloatingActionButton mAddBeerListEntryButton;
+    private String mBreweryID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +55,9 @@ public class BreweryDetailViewActivity extends AppCompatActivity
         BeerListEntryViewHolder.mClickHandler = this;
 
         // get id, load from DB and populate views
-        String breweryID = getIntent().getStringExtra(EXTRA_BREWERY_ID);
+        mBreweryID = getIntent().getStringExtra(EXTRA_BREWERY_ID);
 
-        Query query = mFirebaseDatabaseReference.child(getString(R.string.breweries_child)).child(breweryID);
+        Query query = mFirebaseDatabaseReference.child(getString(R.string.breweries_child)).child(mBreweryID);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -100,8 +102,9 @@ public class BreweryDetailViewActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 // Click action
-                //Intent intent = new Intent(BreweryListActivity.this, ACTIVITY GOES HERE);
-                //startActivity(intent);
+                Intent intent = new Intent(BreweryDetailViewActivity.this, AddBeerActivity.class);
+                intent.putExtra(EXTRA_BREWERY_ID, mBreweryID);
+                startActivity(intent);
             }
         });
     }

@@ -21,7 +21,7 @@ public class BasicUtilities {
         int nRatings = 0;
         if (ratings != null) {
             for (String ratingStr : ratings) {
-                float rating = (float)Integer.parseInt(ratingStr);
+                float rating = (float)Float.parseFloat(ratingStr);
                 if (rating == 0.0f) {
                     continue;
                 }
@@ -34,5 +34,14 @@ public class BasicUtilities {
                 avgRating = 0.0f;
         }
         return avgRating;
+    }
+
+    public static long getBeerTypeIDforTypeName(String s) {
+        for (int i = 1; i < BEER_TYPES.length; i++) {
+            if (BEER_TYPES[i].equals(s)) {
+                return i;
+            }
+        }
+        return 0;
     }
 }

@@ -85,8 +85,9 @@
         android:layout_marginLeft="24dp"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:hint="Name ohne Brauerei"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="@+id/textViewAddBeerNameLabel"
         app:layout_constraintLeft_toRightOf="@+id/textViewAddBeerNameLabel"
         app:layout_constraintTop_toTopOf="@+id/textViewAddBeerNameLabel"
@@ -107,7 +108,7 @@
 
     <Button
         android:id="@+id/buttonAddBeer"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -115,5 +116,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="24dp"
+        android:onClick="confirmAddBeer"
         app:layout_constraintTop_toBottomOf="@+id/ratingBarAddBeerRatingBar" />
 </android.support.constraint.ConstraintLayout>
